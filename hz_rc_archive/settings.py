@@ -12,6 +12,8 @@ BOT_NAME = 'hz_rc_archive'
 SPIDER_MODULES = ['hz_rc_archive.spiders']
 NEWSPIDER_MODULE = 'hz_rc_archive.spiders'
 
+# The encoding to be used for the feed
+FEED_EXPORT_ENCODING = 'utf-8'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'hz_rc_archive (+http://www.yourdomain.com)'
