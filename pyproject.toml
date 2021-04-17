@@ -5,8 +5,12 @@ description = "Archive GCCRC in Hangzhou."
 authors = ["alex4814 <alex4814.fu@gmail.com>"]
 license = "MIT"
 
+[[tool.poetry.source]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "~3.8"
 Scrapy = "^2.5.0"
 
 [tool.poetry.dev-dependencies]
