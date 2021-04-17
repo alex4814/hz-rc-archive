@@ -10,11 +10,14 @@ class HzrcSpider(scrapy.Spider):
     def parse(self, response, **kwargs):
         for rc in response.css("div.index-art-list01 ul li"):
             try:
-                name, = rc.css("a::text").re(r'^关于(.*?)申报')
+                name, *_ = rc.css("a::text").re(r'^关于(.*?)(申报|[被拟]认定)')
+            except ValueError:
+                title = rc.css("a::text").get()
+                self.logger.warning("Failed to extract name from title: %s", title)
+                continue
+            else:
                 date, = rc.css("span").re(r'\[(.*)\]')
                 link = rc.css("a").attrib["href"]
-            except ValueError:
-                continue
 
             yield {
                 "name": name,
