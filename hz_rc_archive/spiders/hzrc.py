@@ -1,6 +1,9 @@
+import re
+
 import scrapy
-from scrapy.loader import ItemLoader
+
 from hz_rc_archive.items import HzRcArchiveItem
+from hz_rc_archive.itemloaders import RcLoader
 
 
 class HzrcSpider(scrapy.Spider):
@@ -8,6 +11,7 @@ class HzrcSpider(scrapy.Spider):
     start_urls = [
         "https://rc.hzrs.hangzhou.gov.cn/articles/2.html"
     ]
+    stop_follow = False
 
     def parse(self, response, **kwargs):
         for rc in response.css("div.index-art-list01 ul li"):
@@ -25,16 +29,16 @@ class HzrcSpider(scrapy.Spider):
 
         next_page = response.css("li a.pages_next").attrib["href"]
         next_page_url = response.urljoin(next_page)
-        if response.url != next_page_url:
+        if not self.stop_follow and response.url != next_page_url:
             yield scrapy.Request(next_page_url, callback=self.parse)
 
     def parse_detail(self, response, date):
         content = response.css("div.articel-detail-con p:first-child")
-        loader = ItemLoader(item=HzRcArchiveItem(), selector=content)
+        loader = RcLoader(item=HzRcArchiveItem(), selector=content)
+        loader.add_value("_id", int(re.search(r'/(\d+)\.html$', response.url).group(1)))
         loader.add_css("name", "span:nth-child(1)::text")
         loader.add_value("date", date)
         loader.add_css("company", "span:nth-child(2)::text")
         loader.add_css("level", "span:nth-child(3)::text")
         loader.add_css("qualification", "span:nth-child(4)::text")
-        loader.add_value("weblink", response.url)
         yield loader.load_item()
