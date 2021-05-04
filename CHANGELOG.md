@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2021-05-04)
+### Feature
+* Persist scraped items to mongodb ([`1437fba`](https://github.com/alex4814/hz-rc-archive/commit/1437fba6982a180ab1147183a1da4ed0969da299))
+* Use TakeFirst as default output processor for item ([`f66e00a`](https://github.com/alex4814/hz-rc-archive/commit/f66e00ab9dc54e4a599f24ce74a0842213a877ab))
+
 ## v0.2.0 (2021-04-17)
 ### Feature
 * Extract detailed information with scrapy item loader ([`e4a5ea3`](https://github.com/alex4814/hz-rc-archive/commit/e4a5ea306714a4d841945aeb9a30ba1573d04118))

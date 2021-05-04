@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hz-rc-archive"
-version = "0.2.0"
+version = "0.3.0"
 description = "Archive GCCRC in Hangzhou."
 authors = ["alex4814 <alex4814.fu@gmail.com>"]
 license = "MIT"
