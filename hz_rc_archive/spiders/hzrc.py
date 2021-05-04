@@ -1,6 +1,6 @@
 import scrapy
-from scrapy.loader import ItemLoader
 from hz_rc_archive.items import HzRcArchiveItem
+from hz_rc_archive.itemloaders import RcLoader
 
 
 class HzrcSpider(scrapy.Spider):
@@ -30,7 +30,7 @@ class HzrcSpider(scrapy.Spider):
 
     def parse_detail(self, response, date):
         content = response.css("div.articel-detail-con p:first-child")
-        loader = ItemLoader(item=HzRcArchiveItem(), selector=content)
+        loader = RcLoader(item=HzRcArchiveItem(), selector=content)
         loader.add_css("name", "span:nth-child(1)::text")
         loader.add_value("date", date)
         loader.add_css("company", "span:nth-child(2)::text")
