@@ -7,9 +7,9 @@ import scrapy
 
 
 class HzRcArchiveItem(scrapy.Item):
+    _id = scrapy.Field()
     name = scrapy.Field()
     date = scrapy.Field()
     company = scrapy.Field()
     level = scrapy.Field()
     qualification = scrapy.Field()
-    weblink = scrapy.Field()
